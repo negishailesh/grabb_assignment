@@ -1,0 +1,11 @@
+import requests
+import json
+from bs4 import BeautifulSoup
+url = 'https://www.ubereats.com/rtapi/eats/v2/eater-store/69e7e248-35fd-4bb2-818c-6571de7c4c16'
+page = requests.get(url)
+soup = BeautifulSoup(page.text,'html.parser')
+data = json.loads(soup.get_text())
+uid = data['store']['sections'][0]['uuid']
+items = data['store']['sectionEntitiesMap'][uid]['itemsMap']
+for each_item in items:
+   print(items[each_item]['title'])
